@@ -14,7 +14,7 @@ const AppForm = () => {
                     placeholder="Salary $" />
 
                 <button type="submit"
-                        className="btn btn-outline-light">Add</button>
+                        className="btn btn-outline-light">Add New Employee</button>
             </form>
         </div>
     );
