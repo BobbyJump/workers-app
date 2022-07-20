@@ -3,7 +3,7 @@ import './app-form.css';
 const AppForm = () => {
     return (
         <div className="app-add-form">
-            <h3>Add new Employeer</h3>
+            <h3>Add new Employee</h3>
             <form
                 className="add-form d-flex">
                 <input type="text"
