@@ -36,12 +36,14 @@ class AppForm extends Component {
                 <form onSubmit={this.onSubmit}
                     className="add-form d-flex">
                     <input type="text"
+                        required
                         className="form-control new-post-label"
                         placeholder="His name?"
                         name="name"
                         value={name} 
                         onChange={this.onValueChange}/>
                     <input type="number"
+                        required
                         className="form-control new-post-label"
                         placeholder="Salary $"
                         name="salary"
