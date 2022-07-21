@@ -14,9 +14,9 @@ class App extends Component{
 
         this.state = {
             employees: [
-                {name: "John D.", salary: 1500, increase: false, id: 1},
-                {name: "Mark R.", salary: 900, increase: true, id: 2},
-                {name: "Adam B.", salary: 1800, increase: false, id: 3},
+                {name: "John D.", salary: 1500, increase: false, like: true, id: 1},
+                {name: "Mark R.", salary: 900, increase: true, like: false, id: 2},
+                {name: "Adam B.", salary: 1800, increase: false, like: false, id: 3},
             ],
         }
     }
@@ -32,6 +32,7 @@ class App extends Component{
             name,
             salary,
             increase: false,
+            like: false,
             id: uuidv4(),
         }
 
@@ -43,19 +44,44 @@ class App extends Component{
         })
     }
 
+    onToggleIncrease = id => {
+        this.setState(({employees}) => ({
+            employees: employees.map(item => {
+                if (item.id === id) { 
+                    return {...item, increase: !item.increase};
+                }
+                return item;
+            })
+        }))
+    }
+
+    onToggleLike = id => {
+        this.setState(({employees}) => ({
+            employees: employees.map(item => {
+                if (item.id === id) { 
+                    return {...item, like: !item.like};
+                }
+                return item;
+            })
+        }))
+    }
+
     render() {
         const { employees } = this.state;
-        console.log(employees);
         return (
             <div className="app">
-                <AppInfo number={employees.length}/>
+                <AppInfo 
+                    number={employees.length}
+                    increase={employees.filter(item => item.increase).length}/>
                 <div className="search-panel">
                     <SearchPanel />
                     <AppFilter />
                 </div>
                 <WorkersList 
                     employees={employees}
-                    onDelete={this.deleteItem}/>
+                    onDelete={this.deleteItem}
+                    onToggleIncrease={this.onToggleIncrease}
+                    onToggleLike={this.onToggleLike}/>
                 <AppForm onAdd={this.addItem}/>
             </div>
         );
