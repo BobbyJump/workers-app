@@ -44,22 +44,11 @@ class App extends Component{
         })
     }
 
-    onToggleIncrease = id => {
+    onToggleProperties = (id, prop) => {
         this.setState(({employees}) => ({
             employees: employees.map(item => {
                 if (item.id === id) { 
-                    return {...item, increase: !item.increase};
-                }
-                return item;
-            })
-        }))
-    }
-
-    onToggleLike = id => {
-        this.setState(({employees}) => ({
-            employees: employees.map(item => {
-                if (item.id === id) { 
-                    return {...item, like: !item.like};
+                    return {...item, [prop]: !item[prop]};
                 }
                 return item;
             })
@@ -73,15 +62,17 @@ class App extends Component{
                 <AppInfo 
                     number={employees.length}
                     increase={employees.filter(item => item.increase).length}/>
+                    
                 <div className="search-panel">
                     <SearchPanel />
                     <AppFilter />
                 </div>
+
                 <WorkersList 
                     employees={employees}
                     onDelete={this.deleteItem}
-                    onToggleIncrease={this.onToggleIncrease}
-                    onToggleLike={this.onToggleLike}/>
+                    onToggleProperties={this.onToggleProperties}/>
+
                 <AppForm onAdd={this.addItem}/>
             </div>
         );
