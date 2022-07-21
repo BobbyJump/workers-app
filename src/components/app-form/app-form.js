@@ -11,9 +11,19 @@ class AppForm extends Component {
         };
     }
 
-    onValueChange = (e) => {
+    onValueChange = e => {
         this.setState({
             [e.target.name]: e.target.value,
+        })
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.onAdd(this.state.name, this.state.salary);
+
+        this.setState({
+            name: '',
+            salary: ''
         })
     }
 
@@ -23,7 +33,7 @@ class AppForm extends Component {
         return (
             <div className="app-add-form">
                 <h3>Add new Employee</h3>
-                <form
+                <form onSubmit={this.onSubmit}
                     className="add-form d-flex">
                     <input type="text"
                         className="form-control new-post-label"
@@ -39,7 +49,9 @@ class AppForm extends Component {
                         onChange={this.onValueChange}/>
     
                     <button type="submit"
-                            className="btn btn-outline-light">Add New Employee</button>
+                            className="btn btn-outline-light">
+                                Add New Employee
+                    </button>
                 </form>
             </div>
         );

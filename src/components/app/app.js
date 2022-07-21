@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -26,9 +27,25 @@ class App extends Component{
         }))
     }
 
+    addItem = (name, salary) => {
+        const newItem = {
+            name,
+            salary,
+            increase: false,
+            id: uuidv4(),
+        }
+
+        this.setState(({employees}) => {
+            const resList = [...employees, newItem];
+            return {
+                employees: resList
+            }
+        })
+    }
+
     render() {
         const { employees } = this.state;
-
+        console.log(employees);
         return (
             <div className="app">
                 <AppInfo number={employees.length}/>
@@ -39,7 +56,7 @@ class App extends Component{
                 <WorkersList 
                     employees={employees}
                     onDelete={this.deleteItem}/>
-                <AppForm />
+                <AppForm onAdd={this.addItem}/>
             </div>
         );
     }
