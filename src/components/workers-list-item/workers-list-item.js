@@ -13,7 +13,7 @@ class WorkersListItem extends Component {
 
     onIncrease = () => {
         this.setState(({increase}) => ({
-            increase: !increase,
+            increase: !increase, 
         }))
     }
 
